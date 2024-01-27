@@ -1,8 +1,10 @@
+//#region //? Referencias
 
 const heroes = ['Batman', 'Superman', 'Mujer Maravilla', 'Aquaman'];
 
-// -------------------------- // ---------------------------- // ---
-//! For Tradicional -----------------------------------------------
+//#endregion
+
+//#region  //! For
 // For clasico y robusto
 
 console.warn('For tradocinal');
@@ -11,8 +13,9 @@ for( let i = 0; i < heroes.length; i++ ){
 
 }
 
-// -------------------------- // ---------------------------- // ---
-//! For in -----------------------------------------------
+//#endregion
+
+//#region //* For in
 // El for in, barre el arrey
 
 console.warn('For in');
@@ -24,8 +27,9 @@ for( let i in heroes ){
 
 }
 
-// -------------------------- // ---------------------------- // ---
-//! For of -----------------------------------------------
+//#endregion
+
+//#region //? For of
 // El for of, las variables se declara en plural y como la variable.
 
 console.warn('For of');
@@ -33,3 +37,5 @@ for( let heroe of heroes){
     console.log( heroe );
 
 }
+
+//#endregion
