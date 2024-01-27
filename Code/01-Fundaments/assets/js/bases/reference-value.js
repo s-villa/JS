@@ -15,7 +15,6 @@ ana.nombre = 'ana';
   
 console.log({ juan, ana });
 
-
 // --------------------------------- // ---------------------- // 
 //! Problema de referencia
 
