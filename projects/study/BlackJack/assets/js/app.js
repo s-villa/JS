@@ -22,27 +22,43 @@ const ComputerCards = document.querySelector('#computer-cards');
 
 //#endregion
 
-//*#region 'Eventos'
+//#region 'Eventos'
 
 btnNewGame.addEventListener('click', () => {
-    console.log('click new game');
-
+    startGame();
 });
 
 btnRequest.addEventListener('click', () => {
     changeValue( true );
-
 });
 
 btnStopGame.addEventListener('click', () => {
     stopTwoButtons();
     computerShift();
-    
 });
 
 //#endregion
 
-//*#region 'Metodos'
+//#region 'Metodos'
+
+const startGame = () => {
+    deck = [];
+    deck = newDeck();
+
+    btnRequest.disabled  = false;
+    btnStopGame.disabled = false;
+
+    playerPoints   = 0;
+    computerPoints = 0;
+
+    poitnsHTML[0].innerText = 0;
+    poitnsHTML[1].innerText = 0;
+
+    playerCards.innerHTML   = '';
+    ComputerCards.innerHTML = '';
+
+}
+
 const newDeck = () => {
 
     for( let i = 2; i <= 10 ; i++ ){
@@ -60,7 +76,6 @@ const newDeck = () => {
 
     return deck;
 }
-newDeck();
 
 const newCard = () => {
 
@@ -97,48 +112,25 @@ const changeValue = ( isPlayer ) => {
     if ( isPlayer ){
         playerPoints = playerPoints + valueCard( isPlayer );
         poitnsHTML[0].innerText = playerPoints;
-        cheackValues( playerPoints, isPlayer );
+
+        if(playerPoints > 21){
+            stopTwoButtons();
+            computerShift();
+            
+        } else if ( playerPoints === 21 ){
+            stopTwoButtons();
+            computerShift();
+        }
 
     } else {
         computerPoints = computerPoints + valueCard( isPlayer );
         poitnsHTML[1].innerText = computerPoints;
-        cheackValues( computerPoints, isPlayer );
     }
 
-}
-
-const cheackValues = ( value, isPlayer ) => {
-
-    if( isPlayer ){
-
-        if(value > 21){
-            console.warn(' Lo siento mucho, perdiste! ');
-            stopTwoButtons();
-            computerShift();
-
-        } else if ( value === 21 ){
-            console.warn('21, Genial!');
-            stopTwoButtons();
-            computerShift();
-        }
-
-    } else {
-        if( value > 21 ){
-            console.warn(' Player 1 Gana! ');
-
-        } else if ( value === 21 ){
-            value = (value > playerPoints) ? 
-                     console.warn(' Computadora Gana! ') 
-                     : console.warn(' Emapate! ');
-
-        } else if ( value > playerPoints ){
-            console.warn(' Computadora Gana! ') 
-        }
-    }
 }
 
 const stopTwoButtons = () => {
-    btnRequest.disabled = true;
+    btnRequest.disabled  = true;
     btnStopGame.disabled = true;
 }
 
@@ -151,5 +143,34 @@ const computerShift = () => {
         }
 
     } while( (computerPoints <= playerPoints) && (playerPoints <= 21) );
+
+    setTimeout(() => {
+        if( computerPoints > 21 ){
+            alert(' Player 1 win! ');
+            
+        } else if ( computerPoints === playerPoints ){
+            alert(' Draw! ');
+
+        } else if ( computerPoints > playerPoints ){
+            alert(' Computer win!! ') 
+
+        } else if ( playerPoints > 1 ){
+            alert(' You lose, Computer win! ') 
+
+        }
+
+    }, 10 );
+
 }
 //#endregion
+
+//#region 'Brand'
+
+/* 
+     @  S.villa_
+    \|\
+    /\
+*/
+
+//#endregion
+
